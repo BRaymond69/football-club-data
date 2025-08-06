@@ -1,15 +1,14 @@
 # === Angular & frontend ===
-/dist
-/tmp
-/out-tsc
-/bazel-out
-/.angular/cache
-.sass-cache/
-.connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
+frontend/dist
+frontend/tmp
+frontend/out-tsc
+frontend/bazel-out
+frontend/.angular/cache
+frontend/.sass-cache/
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/.angular/
+frontend/.vscode/
 
 # === Node modules (global) ===
 **/node_modules
