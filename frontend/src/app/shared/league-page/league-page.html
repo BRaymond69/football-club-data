@@ -1,0 +1,21 @@
+<h2>{{ title }}</h2>
+
+<!-- Loader -->
+<div *ngIf="loading()" class="flex items-center justify-center h-48">
+  <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+</div>
+
+<!-- No data -->
+<div *ngIf="!loading() && clubs().length === 0">
+  <p class="text-center text-gray-500">Aucune donnée disponible.</p>
+</div>
+
+<!-- Club cards -->
+<div *ngIf="!loading() && clubs().length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+  <app-club-card
+    *ngFor="let club of clubs()"
+    [name]="club.name"
+    [logoUrl]="club.logoUrl"
+    [id]="club.id">
+  </app-club-card>
+</div>

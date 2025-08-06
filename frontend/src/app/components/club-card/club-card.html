@@ -1,0 +1,6 @@
+<div
+  (click)="goToClub(name, id)"
+  class="flex items-center space-x-4 p-4 bg-white rounded shadow hover:shadow-lg transition-shadow duration-200 hover:cursor-pointer">
+  <img [src]="logoUrl" alt="{{ name }} logo" class="w-12 h-12 object-contain rounded-full border" />
+  <span class="text-xl font-semibold text-gray-800">{{ name }}</span>
+</div>

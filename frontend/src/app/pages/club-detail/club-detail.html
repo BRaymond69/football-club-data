@@ -1,0 +1,58 @@
+<div class="p-6 space-y-6">
+    <div *ngIf="loading()" class="flex items-center justify-center h-48">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+    </div>
+
+    <div *ngIf="!loading() && !clubData()" class="text-center text-red-500">
+        <p>Error loading club data. Please try again later.</p>
+    </div>
+
+    <div *ngIf="!loading() && clubData()">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Club Info -->
+            <div class="bg-white shadow rounded-xl p-4 space-y-2">
+            <div class="flex items-center space-x-3">
+                <img [src]="clubData().logoUrl" alt="Club Logo" class="w-12 h-12 object-contain" />
+                <span class="text-xl font-bold">{{ clubData().name }}</span>
+            </div>
+            <p><strong>Address:</strong> {{ clubData().address }}</p>
+            <p><strong>Stadium:</strong> {{ clubData().stadium }}</p>
+            <p><strong>Website:</strong> 
+                <a [href]="clubData().website" target="_blank" class="text-blue-600 underline">
+                {{ clubData().website }}
+                </a>
+            </p>
+            <p><strong>Founded:</strong> {{ clubData().founded }}</p>
+            <div class="text-lg font-semibold flex flex-row gap-x-3">Coach:
+                <p class="font-medium" *ngIf="coach(); else noCoach">{{ coach()?.name }}</p>
+                <ng-template #noCoach>
+                    <p>No coach info available.</p>
+                </ng-template>
+            </div>
+            </div>
+
+            <!-- Card 2: Competitions -->
+            <div class="bg-white shadow rounded-xl p-4">
+            <h2 class="text-lg font-semibold">Competitions</h2>
+            <ul class="list-disc list-inside mt-2">
+                <li *ngFor="let competition of competitions()">
+                {{ competition.name }}
+                </li>
+            </ul>
+            </div>
+
+            
+        </div>
+
+        <div class="bg-white shadow rounded-xl p-4">
+            <h2 class="text-lg font-semibold mb-4">Squad</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-h-[400px] overflow-y-auto">
+            <div *ngFor="let player of squad()" class="border rounded p-2 text-center">
+                <p class="font-medium">{{ player.name }}</p>
+                <p class="text-sm text-gray-600">{{ player.position }}</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
