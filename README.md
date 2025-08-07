@@ -3,11 +3,12 @@
 This repository contains a frontend Angular application and a backend Node.js proxy server.
 
 ## 📁 Folder Structure
+
+```bash
 root/
 ├── frontend/ # Angular application
 └── backend-proxy/ # Node.js proxy server
-
-
+```
 ---
 
 ## 🚀 Getting Started
