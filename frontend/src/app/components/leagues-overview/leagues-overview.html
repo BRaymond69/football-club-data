@@ -1,10 +1,11 @@
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-  <app-league-card
-    *ngFor="let league of leagues"
-    [title]="league.title"
-    [description]="league.description"
-    [icon]="league.icon"
-    [link]="league.link"
-    class="h-full"
-  />
+  @for (league of leagues; track league) {
+    <app-league-card
+      [title]="league.title"
+      [description]="league.description"
+      [icon]="league.icon"
+      [link]="league.link"
+      class="h-full"
+    />
+  }
 </section>

@@ -40,7 +40,30 @@ app.get("/teams/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-  
+
+app.get("/matches", async (req, res) => {
+  try {
+    const { dateFrom } = req.query;
+    const date = new Date().toISOString().split("T")[0];
+    const response = await axios.get(
+      "https://api.football-data.org/v4/matches",
+      {
+        headers: {
+          "X-Auth-Token": API_TOKEN,
+        },
+      },
+      {
+        params: {
+          dateFrom: dateFrom,
+          dateTo: date,
+        },
+      }
+    );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Proxy server running at http://localhost:${PORT}`);

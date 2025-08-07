@@ -1,0 +1,68 @@
+<div class="flex flex-row md:flex-row gap-4 p-6 h-[80vh] overflow-y-auto">
+  <!-- Left Side: Previous Matches + Date Picker -->
+  <div class="w-full md:w-1/2 space-y-4 border-r border-black h-full pr-5">
+    <div class="flex relative justify-center items-center mb-10">
+      <h2 class="text-xl font-bold text-center mt-1">Previous Matches</h2>
+      <input 
+        id="date" 
+        type="date" 
+        [value]="selectedDate()" 
+        (input)="onDateChange($event.target.value)"
+        class="border px-2 py-1 rounded absolute right-0 top-0 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    @if (loading()) {
+      <div class="flex items-center justify-center h-48">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+    } @else {
+      @if (previousMatches().length === 0) {
+        <div class="text-center text-gray-500">
+          <p>No finished matches for this date.</p>
+        </div>
+      } @else {
+        <ul class="list-none p-0">
+          @for (match of previousMatches(); track match.id) {
+            <li class="mb-4 p-4 border rounded shadow">
+              <div class="flex justify-between items-center">
+                <span>{{ match.homeTeam }} vs {{ match.awayTeam }}</span>
+                <span>{{ match.score }}</span>
+              </div>
+              <div class="text-sm text-gray-600">{{ match.status }}</div>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </div>
+
+  <!-- Right Side: Live Matches -->
+  <div class="w-full md:w-1/2 space-y-4">
+    <h2 class="text-xl font-bold text-center">Live Matches</h2>
+
+    @if (loading()) {
+      <div class="flex items-center justify-center h-48">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+    } @else {
+      @if (liveMatches().length === 0) {
+        <div class="text-center text-gray-500">
+          <p>No live matches at the moment.</p>
+        </div>
+      } @else {
+        <ul class="list-none p-0">
+          @for (match of liveMatches(); track match.id) {
+            <li class="mb-4 p-4 border rounded shadow">
+              <div class="flex justify-between items-center">
+                <span>{{ match.homeTeam }} vs {{ match.awayTeam }}</span>
+                <span>{{ match.score }}</span>
+              </div>
+              <div class="text-sm text-gray-600">{{ match.status }}</div>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </div>
+</div>

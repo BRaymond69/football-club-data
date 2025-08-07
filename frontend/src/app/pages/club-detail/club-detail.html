@@ -1,13 +1,25 @@
 <div class="p-6 space-y-6">
-    <div *ngIf="loading()" class="flex items-center justify-center h-48">
+    <button class="flex flex-row items-center justify-center px-3 py-1 text-black hover:cursor-pointer" (click)="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-chevron-left-icon lucide-chevron-left">
+            <path d="m15 18-6-6 6-6" />
+        </svg>
+        Go Back
+    </button>
+    @if (loading()) {
+    <div class="flex items-center justify-center h-48">
         <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-500"></div>
     </div>
+    }
 
-    <div *ngIf="!loading() && !clubData()" class="text-center text-red-500">
+    @if (!loading() && !clubData()) {
+    <div class="text-center text-red-500">
         <p>Error loading club data. Please try again later.</p>
     </div>
+    }
 
-    <div *ngIf="!loading() && clubData()">
+    @if (!loading() && clubData()) {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Card 1: Club Info -->
@@ -25,10 +37,11 @@
             </p>
             <p><strong>Founded:</strong> {{ clubData().founded }}</p>
             <div class="text-lg font-semibold flex flex-row gap-x-3">Coach:
-                <p class="font-medium" *ngIf="coach(); else noCoach">{{ coach()?.name }}</p>
-                <ng-template #noCoach>
+                @if (coach()) {
+                <p class="font-medium">{{ coach()?.name }}</p>
+                } @else {
                     <p>No coach info available.</p>
-                </ng-template>
+                }
             </div>
             </div>
 
@@ -36,9 +49,11 @@
             <div class="bg-white shadow rounded-xl p-4">
             <h2 class="text-lg font-semibold">Competitions</h2>
             <ul class="list-disc list-inside mt-2">
-                <li *ngFor="let competition of competitions()">
-                {{ competition.name }}
+                @for (competition of competitions(); track competition.id) {
+                <li>
+                    {{ competition.name }}
                 </li>
+                }
             </ul>
             </div>
 
@@ -48,11 +63,13 @@
         <div class="bg-white shadow rounded-xl p-4">
             <h2 class="text-lg font-semibold mb-4">Squad</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-h-[400px] overflow-y-auto">
-            <div *ngFor="let player of squad()" class="border rounded p-2 text-center">
-                <p class="font-medium">{{ player.name }}</p>
-                <p class="text-sm text-gray-600">{{ player.position }}</p>
-            </div>
+                @for (player of squad(); track player.id) {
+                <div class="border rounded p-2 text-center">
+                    <p class="font-medium">{{ player.name }}</p>
+                    <p class="text-sm text-gray-600">{{ player.position }}</p>
+                </div>
+                }
             </div>
         </div>
-    </div>
+    }
 </div>

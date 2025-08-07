@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { Hero } from "../../components/hero/hero";
-import { LeaguesOverview } from "../../components/leagues-overview/leagues-overview";
+import { LeaguesOverview } from '../../components/leagues-overview/leagues-overview';
+import { HeroImage } from '../../components/hero-image/hero-image';
 
 @Component({
   selector: 'app-home',
-  imports: [Hero, LeaguesOverview],
+  imports: [HeroImage, LeaguesOverview],
   templateUrl: './home.html',
-  styleUrls: ['./home.css']
+  styleUrls: ['./home.css'],
 })
-export class Home {
-
-}
+export class Home {}

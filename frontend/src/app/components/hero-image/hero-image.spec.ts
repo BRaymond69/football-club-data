@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiveStatistics } from './live-statistics';
+import { HeroImage } from './hero-image';
 
-describe('LiveStatistics', () => {
-  let component: LiveStatistics;
-  let fixture: ComponentFixture<LiveStatistics>;
+describe('HeroImage', () => {
+  let component: HeroImage;
+  let fixture: ComponentFixture<HeroImage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LiveStatistics]
+      imports: [HeroImage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LiveStatistics);
+    fixture = TestBed.createComponent(HeroImage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

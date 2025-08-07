@@ -14,19 +14,21 @@ export class FootballApiService {
       return of(this.standingsCache.get(code));
     }
 
-    return this.http.get(`http://localhost:3000/standings/${code}`).pipe(
-      tap((data) => this.standingsCache.set(code, data))
-    );
+    return this.http
+      .get(`http://localhost:3000/standings/${code}`)
+      .pipe(tap((data) => this.standingsCache.set(code, data)));
   }
 
   getTeamsCached(code: string): Observable<any> {
     if (this.teamsCache.has(code)) {
       return of(this.teamsCache.get(code));
     }
-    console.log('Fetching teams for code:', code);
+    return this.http
+      .get(`http://localhost:3000/teams/${code}`)
+      .pipe(tap((data) => this.teamsCache.set(code, data)));
+  }
 
-    return this.http.get(`http://localhost:3000/teams/${code}`).pipe(
-      tap((data) => this.teamsCache.set(code, data))
-    );
+  getLiveMatches(date: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/matches?dateFrom=${date}`);
   }
 }
